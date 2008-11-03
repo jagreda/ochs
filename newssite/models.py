@@ -5,10 +5,10 @@ from django.contrib.auth.models import User, Group
 from django.template.defaultfilters import slugify
 from django.contrib.sites.models import Site
 from django.contrib.admin.filterspecs import FilterSpec, RelatedFilterSpec
-from tnjn.settings import COUNT
+from ochs.settings import COUNT
 
-from tnjn.courses.models import *
-from tnjn.staff.models import *
+from ochs.courses.models import *
+from ochs.staff.models import *
 
 STORY_STATUS = (
     ('D', 'DRAFT'),
