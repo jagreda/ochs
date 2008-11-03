@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.comments.models import Comment, FreeComment
+from django.contrib.comments.models import Comment
 from django.core.exceptions import *
 from django.contrib.auth.models import User, Group
 from django.template.defaultfilters import slugify
@@ -210,7 +210,7 @@ class Story(models.Model):
 class medialinks(models.Model):
     story = models.ForeignKey(
         Story,
-        edit_inline = models.TABULAR,
+        edit_inline = models.Tabular,
         num_in_admin = 3,
         num_extra_on_change = 3,
         )
