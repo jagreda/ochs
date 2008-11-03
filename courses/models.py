@@ -1,5 +1,5 @@
 from django.db import models
-from tnjn.staff.models import UserProfile
+from ochs.staff.models import UserProfile
 
 TERM_LIST= (
     ('SPRING', 'SPRING'),
