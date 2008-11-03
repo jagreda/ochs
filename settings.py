@@ -31,7 +31,7 @@ LANGUAGE_CODE = 'en-us'
 
 SITE_ID = 1
 
-SESSION_COOKIE_NAME = "tnjn"
+SESSION_COOKIE_NAME = "ochs"
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
@@ -65,10 +65,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
 )
 
-ROOT_URLCONF = 'tnjn.urls'
+ROOT_URLCONF = 'ochs.urls'
 
 TEMPLATE_DIRS = (
-    '/home/tnjn.com/templates/'
+    '/home/ochs/templates/'
     )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -87,11 +87,11 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.comments',
     'django.contrib.sitemaps',
-    'tnjn.newssite',
-    'tnjn.staff',
-    'tnjn.courses',
-    'tnjn.media',
-    'tnjn.advertising'
+    'ochs.newssite',
+    'ochs.staff',
+    'ochs.courses',
+    'ochs.media',
+    'ochs.advertising'
 )
 
 COUNT = (
