@@ -1,10 +1,10 @@
 from django.db import models
 import glob, os
 from PIL import Image
-from tnjn.settings import IMAGE_UPLOAD_PATH, IMAGE_FILE_PATH, SIZE_THUMBNAIL, SIZE_RESIZE, SIZE_SIDEBAR, SIZE_BOX, SIZE_STORY02, SIZE_HOME04
-from tnjn.settings import COUNT as RANK
-from tnjn.newssite.models import *
-from tnjn.staff.models import *
+from ochs.settings import IMAGE_UPLOAD_PATH, IMAGE_FILE_PATH, SIZE_THUMBNAIL, SIZE_RESIZE, SIZE_SIDEBAR, SIZE_BOX, SIZE_STORY02, SIZE_HOME04
+from ochs.settings import COUNT as RANK
+from ochs.newssite.models import *
+from ochs.staff.models import *
 
 imagepath = IMAGE_FILE_PATH
 
