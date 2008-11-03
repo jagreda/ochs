@@ -1,5 +1,5 @@
 from django.db import models
-from tnjn.newssite.models import section
+from ochs.newssite.models import section
 
 O_TYPE = (
     ('A', 'SLOT 1'),
