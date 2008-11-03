@@ -210,7 +210,7 @@ class Story(models.Model):
 class medialinks(models.Model):
     story = models.ForeignKey(
         Story,
-        edit_inline = models.Tabular,
+        edit_inline = models.TABULAR,
         num_in_admin = 3,
         num_extra_on_change = 3,
         )
