@@ -42,9 +42,9 @@ MEDIA_URL = ''
 
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
-CACHE_MIDDLEWARE_SECONDS = 600
-CACHE_BACKEND = "memcached://127.0.0.1:11211"
-CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
+# CACHE_MIDDLEWARE_SECONDS = 600
+# CACHE_BACKEND = "memcached://127.0.0.1:11211"
+# CACHE_MIDDLEWARE_ANONYMOUS_ONLY = True
 
 SECRET_KEY = 'h%_qy_a#-8_b=5jgk^muldv8ah6-8we=-^-yd$pdb1f#ac8h14'
 TEMPLATE_LOADERS = (
@@ -59,7 +59,7 @@ AUTHENTICATION_BACKENDS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.cache.CacheMiddleware',
+#     'django.middleware.cache.CacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'django.contrib.flatpages.middleware.FlatpageFallbackMiddleware',
