@@ -1,4 +1,4 @@
-# Django settings for tnjn project.
+# Django settings for Ochs project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
