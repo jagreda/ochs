@@ -47,6 +47,12 @@ class section(models.Model):
         editable = False,
         )
 
+    class Admin:
+            list_display = (
+                'section_name',
+                '_parents_repr',
+                )
+
     def __unicode__(self):
             p_list = self._recurse_for_parents(self)
             p_list.append(self.section_name)
@@ -167,18 +173,55 @@ class Story(models.Model):
     def __unicode__(self):
         return "%s : %s" % (self.headline, self.publish_date)
 
+    class Admin:
+        js = ['tiny_mce/tiny_mce.js', 'js/textareas.js']
+        fields = (
+            (None, {
+                'fields' : ('site', 'publish_date', 'story_status', 'photog_review', 'enable_comments', 'breaking_news', 'template', 'headline', 'summary', 'body', 'storysection', 'storysource',)
+            }),
+        )
+        list_display = (
+            'headline',
+            'storysection',
+            'story_status',
+            'publish_date',
+            'modified_date',
+            )
+        list_filter = [
+            'site',
+            'photog_review',
+            'story_status',
+            'publish_date',
+            'storysection',
+            ]
+        search_fields = [
+            'headline',
+            'summary',
+            'body',
+            ]
+        date_hierarchy = 'publish_date'
+        list_per_page = 25
+
     class Meta:
         ordering = ('-publish_date',)
         verbose_name = "Story"
         verbose_name_plural = "Stories"
 
 class medialinks(models.Model):
+    story = models.ForeignKey(
+        Story,
+        edit_inline = models.TABULAR,
+        num_in_admin = 3,
+        num_extra_on_change = 3,
+        )
     title = models.CharField(
         max_length = 50,
+        core = True,
         verbose_name = "Link Text",
         )
     link = models.CharField(
         max_length = 300,
+        core = True,
         verbose_name = "URL : Include the http:// prefix",
         help_text = """<strong>Include the <em>http://</em> prefix</strong>""",
         )
@@ -203,17 +246,46 @@ class medialinks(models.Model):
         verbose_name_plural = "Related Links for this story"
 
 class storybyline(models.Model):
+    story = models.ForeignKey(
+        Story,
+        edit_inline = models.TABULAR,
+        num_in_admin = 1,
+        num_extra_on_change = 1,
+        )
     position = models.ForeignKey(
         UserPosition,
+        core = True,
         )
     byline = models.ForeignKey(
         UserProfile,
+        core = True,
         )
     course = models.ForeignKey(
         course_information,
         blank = True,
         null = True,
         )
+
+    class Admin:
+        list_display = (
+            'st_head',
+            'position',
+            'byline',
+            'course',
+            'st_section',
+            'st_status',
+            'st_lastupdate',
+            'st_publish',
+            )
+        list_filter = [
+            'position',
+            'course',
+            ]
+        search_fields = [
+            'story__headline',
+            'byline__first_name',
+            'byline__last_name',
+            ]
 
     class Meta:
         verbose_name = "Story Finder"
@@ -316,6 +388,27 @@ class templates(models.Model):
 
     def __unicode__(self):
         return self.system_indicator
+
+    class Admin:
+        list_display = (
+            'system_indicator',
+            'type',
+            'status',
+            'description',
+            'modified_date',
+            )
+        list_filter = [
+            'type',
+            'status',
+            ]
+        search_fields = [
+            'type',
+            'status',
+            'description',
+            'system_indicator',
+            'modified_date',
+            ]
+        date_hierarchy = 'modified_date'
 
     class Meta:
         ordering = ('type',)
@@ -457,6 +550,14 @@ class homepage_templates(models.Model):
     def get_absolute_url(self):
         return "/archives/homepage/%s/%s/" % (self.active_date.strftime("%Y/%b/%d").lower(), self.id)
 
+    class Admin:
+        list_display = (
+            'site',
+            'active_date',
+            'template',
+            'modified_date',
+            )
+
     class Meta:
         ordering = ('-active_date',)
         verbose_name = "Page Layouts - Home"
@@ -597,6 +698,15 @@ class section_templates(models.Model):
 
     def __unicode__(self):
         return self.notes
+
+    class Admin:
+        list_display = (
+            'site',
+            'active_date',
+            'storysection',
+            'template',
+            'modified_date',
+            )
 
     class Meta:
         ordering = ('-active_date',)
