@@ -1,25 +1,49 @@
+from newssite.models import section, Story, medialinks, storybyline, templates, homepage_templates, section_templates
 from django.contrib import admin
-from models import section
+from django.utils.translation import ugettext_lazy as _
 
-class sectionAdmin (admin.ModelAdmin):
-    list_display = (
-        'section_name',
-        '_parents_repr',
-        )
-
-admin.site.register(section, sectionAdmin)
-
-class storybylineInline(admin.TabularInline):
-    model = storybyline
-    extra = 1
-
-class medialinksInline(admin.TabularInline):
+class medialinks_Inline(admin.TabularInline):
     model = medialinks
     extra = 3
 
-class.storyAdmin (admin.ModelAdmin):
+class storybyline_Inline(admin.TabularInline):
+    model = storybyline
+    extra = 1
+
+class templatesOptions(admin.ModelAdmin):
+    list_display = (
+        'system_indicator',
+        'type',
+        'status',
+        'description',
+        'modified_date',
+        )
+    list_filter = [
+        'type',
+        'status',
+        ]
+    search_fieldsets = [
+        'type',
+        'status',
+        'description',
+        'system_indicator',
+        'modified_date',
+        ]
+    date_hierarchy = 'modified_date'
+
+class section_templatesOptions(admin.ModelAdmin):
+    list_display = (
+        'site',
+        'active_date',
+        'storysection',
+        'template',
+        'modified_date',
+        )
+
+class StoryOptions(admin.ModelAdmin):
+    inlines = [medialinks_Inline, storybyline_Inline]
     js = ['tiny_mce/tiny_mce.js', 'js/textareas.js']
-    fields = (
+    fieldsets = (
         (None, {
             'fields' : ('site', 'publish_date', 'story_status', 'photog_review', 'enable_comments', 'breaking_news', 'template', 'headline', 'summary', 'body', 'storysection', 'storysource',)
         }),
@@ -38,21 +62,15 @@ class.storyAdmin (admin.ModelAdmin):
         'publish_date',
         'storysection',
         ]
-    search_fields = [
+    search_fieldsets = [
         'headline',
         'summary',
         'body',
         ]
     date_hierarchy = 'publish_date'
     list_per_page = 25
-    inlines = [
-        medialinksInline,
-        storybylineInline,
-    ]
 
-admin.site.register(story, storyAdmin)
-
-class.storybylineAdmin (admin.ModelAdmin):
+class storybylineOptions(admin.ModelAdmin):
     list_display = (
         'st_head',
         'position',
@@ -67,38 +85,19 @@ class.storybylineAdmin (admin.ModelAdmin):
         'position',
         'course',
         ]
-    search_fields = [
+    search_fieldsets = [
         'story__headline',
         'byline__first_name',
         'byline__last_name',
         ]
 
-admin.site.register(storybyline, storybylineAdmin)
+class sectionOptions(admin.ModelAdmin):
+        list_display = (
+            'section_name',
+            '_parents_repr',
+            )
 
-class.templatesAdmin (admin.ModelAdmin):
-    list_display = (
-        'system_indicator',
-        'type',
-        'status',
-        'description',
-        'modified_date',
-        )
-    list_filter = [
-        'type',
-        'status',
-        ]
-    search_fields = [
-        'type',
-        'status',
-        'description',
-        'system_indicator',
-        'modified_date',
-        ]
-    date_hierarchy = 'modified_date'
-
-admin.site.register(templates, templatesAdmin)
-
-class.homepage_templatesAdmin (admin.ModelAdmin):
+class homepage_templatesOptions(admin.ModelAdmin):
     list_display = (
         'site',
         'active_date',
@@ -106,15 +105,10 @@ class.homepage_templatesAdmin (admin.ModelAdmin):
         'modified_date',
         )
 
-admin.site.register(homepage_templates, homepage_templatesAdmin)
+admin.site.register(templates, templatesOptions)
+admin.site.register(section_templates, section_templatesOptions)
+admin.site.register(Story, StoryOptions)
+admin.site.register(storybyline, storybylineOptions)
+admin.site.register(section, sectionOptions)
+admin.site.register(homepage_templates, homepage_templatesOptions)
 
-class.section_templatesAdmin (admin.ModelAdmin):
-    list_display = (
-        'site',
-        'active_date',
-        'storysection',
-        'template',
-        'modified_date',
-        )
-
-admin.site.register(section_templates, section_templatesAdmin)
