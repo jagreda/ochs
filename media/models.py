@@ -149,7 +149,7 @@ class images(models.Model):
     def get_thumbnail_url(self):
         return "/%s" % self.thumbnail
 
-    def __str__(self):
+    def __unicode__(self):
         return self.description
 
     def save(self):
