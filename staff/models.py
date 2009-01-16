@@ -89,7 +89,7 @@ class UserProfile(models.Model):
     def get_list(self):
         return "%s, %s" % (self.last_name, self.first_name)
 
-    def __str__(self):
+    def __unicode__(self):
         return "%s, %s" % (self.last_name, self.first_name)
 
     def active(self):
