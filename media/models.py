@@ -18,13 +18,6 @@ MEDIA_TYPE = (
 )
 
 class images(models.Model):
-    story = models.ForeignKey(
-        Story,
-        help_text = """ """,
-        edit_inline = models.TABULAR,
-        num_in_admin = 1,
-        num_extra_on_change = 1,
-        )
     description = models.CharField(
         max_length = 9000,
         help_text = """ """,
@@ -35,7 +28,6 @@ class images(models.Model):
         max_length = 100,
         help_text = """ """,
         verbose_name = "Source",
-        core = True,
         )
     file = models.ImageField(
         upload_to = IMAGE_UPLOAD_PATH,
@@ -43,7 +35,6 @@ class images(models.Model):
         verbose_name = "File",
         width_field = "width",
         height_field = "height",
-        core = True,
         )
     width = models.CharField(
         max_length = 10,
@@ -237,46 +228,13 @@ class images(models.Model):
                     pass
         super(images, self).delete()
 
-    class Admin:
-        list_filter = [
-            'modified_date',
-        ]
-        list_display = (
-            'columnTwo',
-            'show_thumb',
-            'descript',
-            'photog_byline',
-            'src',
-            'modified_date',
-        )
-        search_fields = (
-            'description',
-            'source',
-            'photog_byline_id',
-            'modified_date',
-            )
-        date_hierarchy = 'modified_date'
-        ordering = [
-            '-modified_date',
-            'media_type',
-            ]
-        list_per_page = 25
-
     class Meta:
         verbose_name = "Story Images"
         verbose_name_plural = "Story Images"
         ordering = ('sort',)
 
 class media(models.Model):
-    story = models.ForeignKey(
-        Story,
-        help_text = """ """,
-        edit_inline = models.TABULAR,
-        num_in_admin = 1,
-        num_extra_on_change = 1,
-        )
     media_type = models.CharField(
-        core = True,
         max_length = 10,
         choices = MEDIA_TYPE,
         help_text = """Audio: When uploading MP3's <br /> \
@@ -416,30 +374,6 @@ class media(models.Model):
         return '%s' % (src)
     src.allow_tags = True
     src.short_description = 'Source'
-
-    class Admin:
-        list_filter = [
-            'media_type',
-            'modified_date',
-            ]
-        list_display = (
-            'columnTwo',
-            'show_thumb',
-            'desc',
-            'modified_date',
-            )
-        search_fields = [
-            'media_type',
-            'description',
-            'source',
-            'modified_date',
-            ]
-        date_hierarchy = 'modified_date'
-        ordering = [
-            '-modified_date',
-            'media_type',
-            ]
-        list_per_page = 25
 
     class Meta:
         verbose_name = "Story Sidebar Media"

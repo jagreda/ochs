@@ -31,7 +31,7 @@ class imagesOptions(admin.ModelAdmin):
     date_hierarchy = 'modified_date'
     ordering = [
         '-modified_date',
-        'media_type',
+#         'media_type',
         ]
     list_per_page = 25
 

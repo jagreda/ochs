@@ -45,7 +45,7 @@ class course_information(models.Model):
     def get_absolute_url(self):
         return "/course/%s/" % self.id
 
-    def __str__(self):
+    def __unicode__(self):
         return '%s %s : %s : %s' % (self.term, self.year, self.course, self.section)
 
     def quick(self):

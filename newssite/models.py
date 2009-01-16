@@ -191,6 +191,8 @@ class medialinks(models.Model):
         blank = True,
         editable = False,
         )
+    
+    story = models.ForeignKey('Story')
 
     def __unicode__(self):
         return '%s : %s' % (self.modified_date.strftime('%m-%d-%y'), self.title)
@@ -255,6 +257,8 @@ class storybyline(models.Model):
     def st_publish(self):
         return self.story.publish_date
     st_publish.short_description = 'Publish Date'
+    
+    story = models.ForeignKey('Story')
 
 
 class hitcount(models.Model):
