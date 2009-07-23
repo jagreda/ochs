@@ -1,6 +1,6 @@
 The MIT License
 
-Copyright (c) 2008 Ochs Project, University of Tennessee, Knoxville
+Copyright (c) 2008 Ochs Project, School of Journalism and Electronic Media - College of Communication and Information - University of Tennessee - Knoxville, Joseph Agreda, Johnny Dobbins, Staci Baird and Dr. Jim Stovall.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
